@@ -1,0 +1,55 @@
+version: '3.4'
+# Generate the volume for the database
+volumes:
+  postgis-data:
+
+services:
+# Main api declaration
+  app:
+    build: 
+      context: ..
+      dockerfile: ./deployment/api/Dockerfile
+    restart: on-failure
+    tty: true
+    stdin_open: true
+    ports:
+      - 8080:8000
+    volumes:
+      - .:/usr/src/app/v1
+    networks:
+      - sefira
+    depends_on:
+      - "db"
+  db:
+  # Use a postgis image 
+    build: ./deployment/database/
+    volumes:
+      - postgis-data:/var/lib/postgresql
+    environment:
+      # Database configuration data
+      - POSTGRES_DB=gis
+      - POSTGRES_USER=docker
+      - POSTGRES_PASS=docker
+      - ALLOW_IP_RANGE=0.0.0.0/0
+      # Enable the required extensions to use postgis
+      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
+    ports:
+      - "54321:5432"
+    restart: on-failure
+    networks:
+      - sefira
+  etl:
+    build: 
+      context: ..
+      dockerfile: ./deployment/etl/Dockerfile
+    ports:
+    - "8001:80"
+    depends_on:
+      - "db"
+    networks:
+      - sefira
+#Declare the network to share the same between microservices
+networks:
+  sefira:
+    driver: bridge
+
