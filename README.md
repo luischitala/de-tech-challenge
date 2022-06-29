@@ -524,6 +524,7 @@ $ git clone https://github.com/luischitala/de-tech-challenge
   
 
   
+Once we have cloned the repository, we need to build the services.
 
 ```bash
 
@@ -532,17 +533,24 @@ $ git clone https://github.com/luischitala/de-tech-challenge
 $ cd de-tech-challenge/de-tech-challenge
 
   
-
 $ docker-compose -f ./deployment/docker-compose.yml build
 
-swa
+
+  
+
+```
+
+Then we need to start all the services
+
+```bash
+
+
 
 $ docker-compose -f ./deployment/docker-compose.yml up -d
 
   
 
 ```
-
   
 
   
