@@ -239,13 +239,11 @@ The database definition has been made in the database creation domain, instead o
 
   
 
-The database selected for this project was PostgreSQL along with the PostGIS extension, which allows us to store geometrical data, and also to do spatial queries which made this project's solution optimal.
+The database selected for this project was PostgreSQL along with the PostGIS extension, which allows us to store geometrical data, and also to do spatial queries which was the optimal solution for this project.  
 
   
 
-  
-
-The image implemented was Kartoza/postgis which can be downloaded in the following [Link](https://hub.docker.com/r/kartoza/postgis/)
+The Docker image implemented was Kartoza/postgis which can be downloaded in the following [Link](https://hub.docker.com/r/kartoza/postgis/)
 
   
 
@@ -283,7 +281,7 @@ The entities for this project are:
 
   
 
-Both entities have two representations, the first is the Model, which is made by using SQLAlchemy and allows to the database layer to interact with data, and the second is the Schema (DTO) form using Pydantic, which allows to query the data.
+Both entities have two representations, the first is the Model, which is made by using SQLAlchemy and allows to the database layer to interact with data, and the second is the Schema (DTO) form using Pydantic, which allows to query and transfer data among other application layers.
 
   
 
@@ -331,9 +329,9 @@ Once the connection between the ETL script and the database has been successfull
 
   
 
-When both requests have been completed, the FastAPI Service will be ready ready to serve the data by using different endpoints.
+When both requests have been completed, the FastAPI Service will be ready to serve the data by using different endpoints.
 
-There's also a DAG format ETL valid format to execute with Apache Airflow, and a Jupyter notebook where all the data discovery was made.
+There's also a DAG ETL, which is the valid format for Apache Airflow, along with a Jupyter notebook where all the data discovery was made.
 
 The ETL was separated in different functions to make the code scalable. 
   
